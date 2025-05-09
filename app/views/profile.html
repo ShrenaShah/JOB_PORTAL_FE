@@ -1,0 +1,50 @@
+<div class="container mt-5">
+    <div class="card p-4 shadow w-100" style="max-width: 600px; margin: auto;">
+        <h3 class="text-center mb-4">Profile</h3>
+
+        <!-- Resume Upload Form -->
+        <form ng-submit="uploadResume()" enctype="multipart/form-data" action="javascript:void(0)">
+            <div class="mb-3">
+                <label for="resume" class="form-label">Upload Resume</label>
+                <input type="file" id="resume" name="resume" class="form-control" file-model="resumeFile" required />
+            </div>
+
+            <!-- Show loading spinner while uploading -->
+            <div class="text-center mb-3" ng-if="isLoading">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" ng-disabled="isLoading">
+                {{ isLoading ? 'Uploading...' : 'Upload Resume' }}
+            </button>
+        </form>
+    </div>
+
+    <!-- Applied Jobs Section -->
+    <div class="card p-4 shadow w-100 mt-4" style="max-width: 600px; margin: auto;">
+        <h4 class="text-center mb-4">Applied Jobs</h4>
+
+        <!-- Show message if no jobs are applied -->
+        <div class="text-center" ng-if="appliedJobs.length === 0">
+            <p>You have not applied for any jobs yet.</p>
+        </div>
+
+        <!-- List of Applied Jobs -->
+        <div class="list-group" ng-if="appliedJobs.length > 0">
+            <div class="list-group-item" ng-repeat="application in appliedJobs">
+                <h5 class="mb-1">{{ application.job.title }}</h5>
+                <p class="mb-1"><strong>Company:</strong> {{ application.job.company }}</p>
+                <p class="mb-1"><strong>Status:</strong> 
+                    <span class="badge" ng-class="{
+                        'bg-success': application.status === 'accepted',
+                        'bg-warning': application.status === 'pending',
+                        'bg-danger': application.status === 'rejected'
+                    }">{{ application.status | uppercase }}</span>
+                </p>
+                <a ng-if="application.resume" href="{{ application.resume }}" target="_blank" class="btn btn-link p-0">View Resume</a>
+            </div>
+        </div>
+    </div>
+</div>

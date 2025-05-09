@@ -1,0 +1,148 @@
+<div ng-controller="NavbarController">
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2980b9;
+      --text-dark: #2c3e50;
+    }
+    
+    .navbar {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 12px 0;
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--primary-color) !important;
+      font-size: 1.5rem;
+    }
+    
+    .nav-link {
+      color: var(--text-dark) !important;
+      font-weight: 500;
+      padding: 8px 16px !important;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--primary-color) !important;
+    }
+    
+    .nav-link:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background-color: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover:after {
+      width: 70%;
+      left: 15%;
+    }
+    
+    .active-link {
+      color: var(--primary-color) !important;
+    }
+    
+    .active-link:after {
+      width: 70%;
+      left: 15%;
+    }
+    
+    .btn-login {
+      background-color: var(--primary-color);
+      color: white !important;
+      border-radius: 20px;
+      padding: 8px 22px !important;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-login:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+    
+    .btn-register {
+      background-color: transparent;
+      color: var(--primary-color) !important;
+      border: 1.5px solid var(--primary-color);
+      border-radius: 20px;
+      padding: 8px 22px !important;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-register:hover {
+      background-color: rgba(52, 152, 219, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .navbar-toggler {
+      border: none;
+      padding: 0;
+    }
+    
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+    
+    @media (max-width: 991px) {
+      .nav-link:after {
+        left: 0;
+      }
+    
+      .nav-link:hover:after {
+        width: 40px;
+        left: 16px;
+      }
+    
+      .active-link:after {
+        width: 40px;
+        left: 16px;
+      }
+    }
+    #navbarid{
+      margin: 3%;
+    }
+    
+  </style>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white" id="navbarid">
+    <div class="container">
+      <a class="navbar-brand" href="#/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-briefcase-fill me-2" viewBox="0 0 16 16">
+          <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5"/>
+          <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85z"/>
+        </svg>
+        JobPortal
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" ng-class="{'active-link': isActive('/')}" href="#/">Home</a>
+          </li>
+          <li class="nav-item" ng-if="isLoggedIn">
+            <a class="nav-link" ng-class="{'active-link': isActive('/jobs')}" href="/#!/jobs">Jobs</a>
+          </li>
+          <li class="nav-item" ng-if="isLoggedIn && isEmployer">
+            <a class="nav-link" ng-class="{'active-link': isActive('/create-job')}" href="/#!/create-job">Create Job</a>
+        </li>
+          <li class="nav-item" ng-if="isLoggedIn">
+            <a class="nav-link" ng-class="{'active-link': isActive('/profile')}" href="/#!/profile">Profile</a>
+          </li>
+        </ul>
+        <div class="d-flex gap-2">
+          <a class="nav-link btn-login" href="/#!/login" ng-if="!isLoggedIn">Login</a>
+          <a class="nav-link btn-register" href="/#!/register" ng-if="!isLoggedIn">Register</a>
+          <button class="btn btn-danger" ng-click="logout()" ng-if="isLoggedIn">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>

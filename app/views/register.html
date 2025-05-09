@@ -1,0 +1,38 @@
+<div class="container d-flex align-items-center justify-content-center vh-100">
+    <div class="card p-4 shadow w-100" style="max-width: 450px;">
+      <h3 class="text-center mb-4">Register</h3>
+  
+      <form ng-submit="register()">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input type="text" ng-model="registerData.name" class="form-control" required />
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" ng-model="registerData.email" class="form-control" required />
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" ng-model="registerData.password" class="form-control" required />
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label">Role</label>
+          <select ng-model="registerData.role" class="form-select" required>
+            <option value="">Select Role</option>
+            <option value="jobseeker">Job Seeker</option>
+            <option value="employer">Employer</option>
+          </select>
+        </div>
+  
+        <button type="submit" class="btn btn-success w-100">Register</button>
+  
+        <div class="mt-3 text-center">
+          <a href="#!/login">Already have an account? Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  
