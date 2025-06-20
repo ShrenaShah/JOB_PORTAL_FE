@@ -47,4 +47,28 @@
             </div>
         </div>
     </div>
+
+    <!-- Saved Jobs Section -->
+    <div class="card p-4 shadow w-100 mt-4" style="max-width: 600px; margin: auto;">
+        <h4 class="text-center mb-4">Saved Jobs</h4>
+
+        <!-- Show message if no jobs are saved -->
+        <div class="text-center" ng-if="savedJobs.length === 0">
+            <p>You have not saved any jobs yet.</p>
+        </div>
+
+        <!-- List of Saved Jobs -->
+        <div class="list-group" ng-if="savedJobs.length > 0">
+            <div class="list-group-item" ng-repeat="job in savedJobs">
+                <h5 class="mb-1">{{ job.title }}</h5>
+                <p class="mb-1"><strong>Company:</strong> {{ job.company }}</p>
+                <p class="mb-1"><strong>Location:</strong> {{ job.location }}</p>
+                <p class="mb-1"><strong>Salary:</strong> {{ job.salary | currency:'₹':0 }}</p>
+                <p class="mb-1"><strong>Experience Required:</strong> {{ job.experienceRequired }} years</p>
+                <p class="mb-1"><strong>Skills Required:</strong> <span ng-repeat="skill in job.skillsRequired">{{ skill }}<span ng-if="!$last">, </span></span></p>
+                <p class="mb-1"><strong>Description:</strong> {{ job.description }}</p>
+                <p class="mb-1"><strong>Posted At:</strong> {{ job.createdAt | date:'medium' }}</p>
+            </div>
+        </div>
+    </div>
 </div>
