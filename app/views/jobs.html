@@ -204,8 +204,15 @@
       </div>
       <div class="job-footer">
         <div class="job-date">Posted {{job.createdAt | date:'MMMM d, y h:mm a'}}</div>
-        <!-- Apply Now button for job seekers -->
-        <button ng-if="!isEmployer" class="btn btn-apply" ng-click="applyForJob(job._id)">Apply Now</button>
+        <!-- Apply Now and Save Job buttons for job seekers -->
+        <div ng-if="!isEmployer" style="display: flex; gap: 10px; align-items: center;">
+          <button class="btn btn-apply" ng-click="applyForJob(job._id)">Apply Now</button>
+          <button class="btn btn-bookmark" ng-click="saveTheJobs(job._id)" title="Save Job" style="background: none; border: none; padding: 0; cursor: pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="var(--primary-color)" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-7-5-7 5V5z"/>
+            </svg>
+          </button>
+        </div>
         <!-- Delete and View Applications buttons for employers -->
         <div ng-if="isEmployer">
             <button class="btn btn-danger btn-sm" ng-click="deleteJob(job._id)">Delete</button>
