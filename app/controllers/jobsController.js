@@ -67,7 +67,7 @@ app.controller("JobsController", [
         .split("=")[1];
       $http
         .post(
-          `${$scope.baseUrl}/applications`,
+          `${$scope.baseUrl}/users/savethejob`,
           { jobId: jobId },
           {
             headers: {
