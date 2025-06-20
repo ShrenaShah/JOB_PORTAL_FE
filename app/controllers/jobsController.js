@@ -89,6 +89,50 @@ app.controller("JobsController", [
         });
     };
 
+    // Search jobs by title or skills
+    $scope.searchJob = function (searchType, searchValue) {
+      const token = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("token="))
+        .split("=")[1];
+      let apiUrl = "";
+      let params = {};
+
+      if (searchType === "title") {
+        apiUrl = `${$scope.baseUrl}/jobs/search`;
+        params = {
+          params: { title: searchValue },
+          headers: { Authorization: `Bearer ${token}` },
+        };
+      } else if (searchType === "skills") {
+        apiUrl = `${$scope.baseUrl}/jobs/skills`;
+        params = {
+          params: { skills: searchValue },
+          headers: { Authorization: `Bearer ${token}` },
+        };
+      } else {
+        alert("Invalid search type.");
+        return;
+      }
+
+      $http
+        .get(apiUrl, params)
+        .then(function (response) {
+          $scope.jobs = response.data;
+          if ($scope.jobs.length === 0) {
+            alert("No jobs found matching your search.");
+          }
+        })
+        .catch(function (error) {
+          const errorMessage =
+            error.data && error.data.message
+              ? error.data.message
+              : "An unknown error occurred.";
+          alert(`Failed to search jobs: ${errorMessage}`);
+          console.error("Error details:", error);
+        });
+    };
+
     $scope.applyForJob = function (jobId) {
       const token = document.cookie
         .split("; ")
